@@ -1,6 +1,6 @@
 {
   "name": "fsr",
-  "app_id": "",
+  "app_id": "cccb468c",
   "gulpStartupTasks": [
     "sass",
     "watch"
