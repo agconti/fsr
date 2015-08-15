@@ -1,7 +1,6 @@
 var gulp = require('gulp')
   , browserSync = require('browser-sync').create()
   , reload = browserSync.reload
-  , modRewrite = require('connect-modrewrite')
   , changed = require('gulp-changed')
   , autoprefixer = require('gulp-autoprefixer')
   , sass = require('gulp-sass')

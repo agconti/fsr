@@ -5,12 +5,11 @@
 /**
  * For module level configuration.
  * @constructor
- * @param {object} $httpProvider
  */
-function Config ($httpProvider) {
+function Config () {
 }
 
 angular.module('config', [])
-.config(['$httpProvider', Config])
+.config([Config])
 
 })()

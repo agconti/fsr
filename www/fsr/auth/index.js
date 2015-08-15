@@ -3,6 +3,17 @@
 
 
 /**
+ * Handles foursquare's oauth callback and extracts access_token
+ * @constructor
+ */
+function oauthCallback ($location, $state, authFactory) {
+  var access_token = $location.hash().split("=")[1]
+  authFactory.saveToken(access_token)
+  $state.go('auth')
+}
+
+
+/**
  * App level configuration
  * @constructor
  */
@@ -17,21 +28,20 @@ function config ($httpProvider, $stateProvider, $urlRouterProvider) {
     , controllerAs: "auth"
     })
 
-    $urlRouterProvider.when('/auth/callback/', ['$location', '$state', 'authFactory', function ($location, $state, authFactory) {
-      var access_token = $location.hash().split("=")[1]
-      authFactory.saveToken(access_token)
-      $state.go('auth')
-  }])
+    $urlRouterProvider.when('/auth/callback/', [ '$location'
+                                               , '$state'
+                                               , 'authFactory'
+                                               , oauthCallback])
 }
 
 /**
- * Initializes the auth module. Forces redirect to login when not authed.
+ * Forces the user to login when not authenticated.
  * @constructor
  * @param {object} $rootScope
  * @param {object} $state
  * @param {object} authFactory
  */
-function Initialize ($rootScope, $state, authFactory) {
+function ForceLogin ($rootScope, $state, authFactory) {
   $rootScope.$on('$stateChangeStart', function(e, toState) {
     if (toState.name === 'auth') { return false }
 
@@ -44,6 +54,6 @@ function Initialize ($rootScope, $state, authFactory) {
 
 angular.module('auth', ['ui.router', 'angular-storage'])
 .config(['$httpProvider', '$stateProvider', '$urlRouterProvider', config])
-.run(['$rootScope', '$state', 'authFactory', Initialize])
+.run(['$rootScope', '$state', 'authFactory', ForceLogin])
 
 })()
