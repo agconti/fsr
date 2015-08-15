@@ -1,6 +1,7 @@
 var gulp = require('gulp')
   , browserSync = require('browser-sync').create()
   , reload = browserSync.reload
+  , modRewrite = require('connect-modrewrite')
   , changed = require('gulp-changed')
   , autoprefixer = require('gulp-autoprefixer')
   , sass = require('gulp-sass')
@@ -38,10 +39,13 @@ function NgConfigOptions(env){
   this.wrap = ';(function () {\n <%= module %> \n})()'
 }
 
+var historyApiFallback = require('connect-history-api-fallback');
+
 gulp.task('browser-sync', function () {
   browserSync.init({
      server: {
        baseDir: baseDir
+     , middleware: [ historyApiFallback() ]
      }
    })
 })
@@ -80,8 +84,8 @@ gulp.task('config:prod', function () {
 function buildJs() {
   return gulp.src(jsSrc)
     .pipe(changed(baseDir))
+    .pipe(uglify().on('error', console.error.bind(console)))
     .pipe(concat('main.min.js'))
-    .pipe(uglify())
     .pipe(flatten())
     .pipe(gulp.dest(baseDir))
     .pipe(browserSync.stream())
