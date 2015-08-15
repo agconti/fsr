@@ -13,13 +13,14 @@ function config ($stateProvider, $urlRouterProvider) {
     , templateUrl: './fsr/auth/index.html'
     })
 
-    $urlRouterProvider.when('/auth/callback/', ['$location', '$state', function ($location, $state) {
+    $urlRouterProvider.when('/auth/callback/', ['$location', '$state', 'store', function ($location, $state, store) {
       var access_token = $location.hash().split("=")[1]
+      store.set('token', access_token)
       $state.go('auth')
   }])
 }
 
-angular.module('auth', [])
+angular.module('auth', ['angular-storage'])
 .config(['$stateProvider', '$urlRouterProvider', config])
 
 })()

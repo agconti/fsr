@@ -28,7 +28,7 @@ function startUp ($ionicPlatform) {
  */
 function config ($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true)
-  // $urlRouterProvider.otherwise('/auth')
+  $urlRouterProvider.otherwise('/auth')
 
 }
 
