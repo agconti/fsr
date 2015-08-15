@@ -1,10 +1,7 @@
 <ion-view view-title="login">
-  <ion-content>
-    <button ui-sref="auth.callback({token:'JSBDSJ4XWGSAKTBYVCCR0APMD0YU322PEYJEJ2CBY0EXUUQD'})"
-            name="button">Login with Foursquare
-    </button>
-      <a href='https://foursquare.com/oauth2/authenticate?client_id=YMV0WS2FQOEO30MCSL3043EXUSFPPSNCCXKLY22QLSSV3I04&response_type=token&redirect_uri=http://localhost:3000/auth/callback/'>
-      FSR
-    </a>
+  <ion-content ng-controller="AuthController as auth">
+      Hey you are {{ auth.isLoggedIn()? "logged in!": "not logged in."}}
+      <a ng-if="!auth.isLoggedIn()"
+         href="{{auth.fsLoginUrl}}">Log in with Foursquare</a>
   </ion-content>
 </ion-view>
