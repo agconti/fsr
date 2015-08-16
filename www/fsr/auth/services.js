@@ -52,7 +52,9 @@ function AuthFactory (FS_CONFIG, store) {
  function AuthInterceptor (authFactory) {
    return {
      'request': function(config) {
-       config.headers["Authorization"] = "Bearer " + authFactory.getToken()
+       config.params = config.params || {}
+       config.params.oauth_token = authFactory.getToken()
+       config.params.v = '20131016'
        return config
      }
    }

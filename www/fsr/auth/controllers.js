@@ -3,7 +3,7 @@
 
 
 /**
- * App level configuration
+ * Manages loging in and loging out
  * @constructor
  * @param {object} authFactory
  */

@@ -6,10 +6,15 @@
  * For module level configuration.
  * @constructor
  */
-function Config () {
+function Config (FS_CONFIG, RestangularProvider) {
+  // configure Restangular
+  RestangularProvider.setBaseUrl(FS_CONFIG.host)
+  RestangularProvider.setResponseExtractor(function(response) {
+    return response.response
+  })
 }
 
-angular.module('config', [])
-.config([Config])
+angular.module('config', ['restangular'])
+.config(['FS_CONFIG', 'RestangularProvider', Config])
 
 })()
