@@ -1,0 +1,7 @@
+<ion-view view-title="login">
+  <ion-content ng-controller="AuthController as auth">
+      Hey you are {{ auth.isLoggedIn()? "logged in!": "not logged in."}}
+      <a ng-if="!auth.isLoggedIn()"
+         href="{{auth.fsLoginUrl}}">Log in with Foursquare</a>
+  </ion-content>
+</ion-view>

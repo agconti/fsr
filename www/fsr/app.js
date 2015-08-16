@@ -26,13 +26,18 @@ function startUp ($ionicPlatform) {
  * App level configuration
  * @constructor
  */
-function config ($stateProvider, $urlRouterProvider) {
-
-  $urlRouterProvider.otherwise('/')
+function config ($locationProvider, $stateProvider, $urlRouterProvider) {
+  $locationProvider.html5Mode(true)
+  $urlRouterProvider.otherwise('/auth')
 
 }
 
-angular.module('fsr', ['ionic'])
+angular.module('fsr', [ 'ionic'
+                      , 'config'
+                      , 'auth'])
 .run(['$ionicPlatform', startUp])
-.config(['$stateProvider', '$urlRouterProvider', config])
+.config([ '$locationProvider'
+        , '$stateProvider'
+        , '$urlRouterProvider'
+        , config])
 })()

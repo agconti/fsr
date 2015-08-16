@@ -1,14 +1,21 @@
 var gulp = require('gulp')
+  , changed = require('gulp-changed')
+  , concat = require('gulp-concat')
+  , gulpNgConfig = require('gulp-ng-config')
+
+  // live reload
   , browserSync = require('browser-sync').create()
   , reload = browserSync.reload
-  , changed = require('gulp-changed')
+  , historyApiFallback = require('connect-history-api-fallback')
+
+  // sass
   , autoprefixer = require('gulp-autoprefixer')
   , sass = require('gulp-sass')
   , minifyCss = require('gulp-minify-css')
+
+  // js 
   , uglify = require('gulp-uglify')
   , flatten = require('gulp-flatten')
-  , concat = require('gulp-concat')
-  , gulpNgConfig = require('gulp-ng-config')
 
   // Path config
   , appName = '/fsr'
@@ -42,6 +49,7 @@ gulp.task('browser-sync', function () {
   browserSync.init({
      server: {
        baseDir: baseDir
+     , middleware: [ historyApiFallback() ]
      }
    })
 })
@@ -80,8 +88,8 @@ gulp.task('config:prod', function () {
 function buildJs() {
   return gulp.src(jsSrc)
     .pipe(changed(baseDir))
+    .pipe(uglify().on('error', console.error.bind(console)))
     .pipe(concat('main.min.js'))
-    .pipe(uglify())
     .pipe(flatten())
     .pipe(gulp.dest(baseDir))
     .pipe(browserSync.stream())
