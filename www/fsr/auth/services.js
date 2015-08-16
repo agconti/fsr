@@ -2,12 +2,12 @@
 'use strict'
 
 
-
 /**
  * A factory that manages authentication with FS.
  * @constructor
  * @param {object} FS_CONFIG -- foursquare
  * @param {object} store -- from angular-storage
+ * @returns {object} AuthFactory
  */
 function AuthFactory (FS_CONFIG, store) {
   var tokenKey = 'token'
@@ -47,6 +47,7 @@ function AuthFactory (FS_CONFIG, store) {
   * An interceptor for adding the oauth token for requests to foursquare.
   * @constructor
   * @param {object} authFactory
+  * @returns {object} config
   */
  function AuthInterceptor (authFactory) {
    return {

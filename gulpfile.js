@@ -1,14 +1,21 @@
 var gulp = require('gulp')
+  , changed = require('gulp-changed')
+  , concat = require('gulp-concat')
+  , gulpNgConfig = require('gulp-ng-config')
+
+  // live reload
   , browserSync = require('browser-sync').create()
   , reload = browserSync.reload
-  , changed = require('gulp-changed')
+  , historyApiFallback = require('connect-history-api-fallback')
+
+  // sass
   , autoprefixer = require('gulp-autoprefixer')
   , sass = require('gulp-sass')
   , minifyCss = require('gulp-minify-css')
+
+  // js 
   , uglify = require('gulp-uglify')
   , flatten = require('gulp-flatten')
-  , concat = require('gulp-concat')
-  , gulpNgConfig = require('gulp-ng-config')
 
   // Path config
   , appName = '/fsr'
@@ -37,8 +44,6 @@ function NgConfigOptions(env){
   this.createModule = false
   this.wrap = ';(function () {\n <%= module %> \n})()'
 }
-
-var historyApiFallback = require('connect-history-api-fallback');
 
 gulp.task('browser-sync', function () {
   browserSync.init({
