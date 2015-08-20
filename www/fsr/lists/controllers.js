@@ -8,7 +8,10 @@
  * @param {object} listFactory
  */
 function ListController (listsFactory) {
-  this.venues = listsFactory.get()
+  var ctr = this
+  listsFactory.get().then(function(venue){
+    ctr.venue = venue
+  })
 }
 
 

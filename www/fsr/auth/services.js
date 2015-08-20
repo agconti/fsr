@@ -54,7 +54,7 @@ function AuthFactory (FS_CONFIG, store) {
      'request': function(config) {
        config.params = config.params || {}
        config.params.oauth_token = authFactory.getToken()
-       config.params.v = '20131016'
+       config.params.v = '20150801'
        return config
      }
    }

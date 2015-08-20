@@ -1,5 +1,14 @@
 <ion-view view-title="Lists">
   <ion-content ng-controller="ListController as list">
-  <pre>{{ list.venues | json}}</pre>
+    <h1>Go to {{list.venue.venue.name}}</h1>
+    <p>
+      {{list.venue.venue.location.address}}
+    </p>
+    <p>
+      {{list.venue.venue.location.crossStreet}}
+
+    </p>
+    <img ng-src="{{list.venue.photo.prefix + list.venue.photo.width + 'x' + list.venue.photo.height + list.venue.photo.suffix}}" alt="{{list.venue.venue.name}}" />
+  <pre>{{ list.venue | json}}</pre>
   </ion-content>
 </ion-view>
