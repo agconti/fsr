@@ -1,14 +1,18 @@
 <ion-view view-title="Lists">
   <ion-content ng-controller="ListController as list">
-    <h1>Go to {{list.venue.venue.name}}</h1>
-    <p>
-      {{list.venue.venue.location.address}}
-    </p>
-    <p>
-      {{list.venue.venue.location.crossStreet}}
-
-    </p>
-    <img ng-src="{{list.venue.photo.prefix + list.venue.photo.width + 'x' + list.venue.photo.height + list.venue.photo.suffix}}" alt="{{list.venue.venue.name}}" />
+    <article class="venue">
+      <img class="venue__image" ng-src="{{list.getImageUrl()}}" alt="{{list.venue.venue.name}}" />
+      <ul class="venue__tips">
+        <li>Candy</li>
+        <li>Booze</li>
+        <li>Gum</li>
+      </ul>
+      <header class="venue__title">
+        <h1>{{list.venue.venue.name}}</h1>
+        <h2>{{list.venue.venue.location.formattedAddress[0]}}</h2>
+      </header>
+      <div class="venue__map"></div>
+    </article>
   <pre>{{ list.venue | json}}</pre>
   </ion-content>
 </ion-view>
