@@ -1,0 +1,34 @@
+.venue {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: flex-start;
+
+  &__image {
+    flex: 1 1 auto;
+    height: 50vh;
+  }
+
+  &__tips{
+    flex: 1 1 auto;
+    height: 40vh;
+  }
+
+  &___title {
+    flex: 1 1 auto;
+    height: 10vh;
+  }
+
+    &__map {
+    flex: 1 1 auto;
+    height: 100vh;
+  }
+
+  &__refresh {
+    flex: 1 1 auto;
+    height: 10vh;
+  }
+
+}
