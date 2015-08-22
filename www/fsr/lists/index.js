@@ -11,6 +11,11 @@ function config ($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('list', {
       url: '/lists'
+    , resolve: {
+        venue: ['listsFactory', function(listsFactory){
+          return listsFactory.get()
+        }]
+      }
     , templateUrl: './fsr/lists/index.html'
     , controller: "ListController"
     , controllerAs: "list"

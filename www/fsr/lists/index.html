@@ -1,5 +1,5 @@
 <ion-view view-title="Lists">
-  <ion-content ng-controller="ListController as list">
+  <ion-content>
     <article class="venue">
       <img class="venue__image" ng-src="{{list.getImageUrl()}}" alt="{{list.venue.venue.name}}" />
       <ul class="venue__tips">
@@ -12,7 +12,7 @@
         <h2>{{list.venue.venue.location.formattedAddress[0]}}</h2>
       </header>
       <div class="venue__map"></div>
+      <button ng-click="list.get()">Refresh</button>
     </article>
-  <pre>{{ list.venue | json}}</pre>
   </ion-content>
 </ion-view>

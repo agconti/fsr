@@ -3,7 +3,7 @@
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch;
   align-content: flex-start;
 
   &__image {
@@ -21,8 +21,14 @@
     height: 10vh;
   }
 
-  &__map {
+    &__map {
     flex: 1 1 auto;
     height: 100vh;
   }
+
+  &__refresh {
+    flex: 1 1 auto;
+    height: 10vh;
+  }
+
 }

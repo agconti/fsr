@@ -7,12 +7,15 @@
  * @constructor
  * @param {object} listFactory
  */
-function ListController (listsFactory) {
+function ListController (venue, listsFactory) {
   var ctr = this
 
-  listsFactory.get().then(function(venue){
-    ctr.venue = venue
-  })
+  this.venue = venue
+  this.get = function() {
+    listsFactory.get().then(function(venue){
+      ctr.venue = venue
+    })
+  }
 
   this.getImageUrl = function () {
    var host = ctr.venue.photo.prefix
@@ -26,5 +29,5 @@ function ListController (listsFactory) {
 
 
 angular.module('lists')
-.controller('ListController', ['listsFactory', ListController])
+.controller('ListController', ['venue', 'listsFactory', ListController])
 })()
