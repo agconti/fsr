@@ -36,11 +36,12 @@ function UserListsRestangular (Restangular) {
 /**
  * A factory that manages lists from FS.
  * @constructor
+ * @param {object} TipsFactory
  * @param {object} ListsRestangular
  * @param {object} UserListsRestangular
  * @returns {object} ListsFactory
  */
-function ListsFactory (ListsRestangular, UserListsRestangular) {
+function ListsFactory (venuesFactory, ListsRestangular, UserListsRestangular) {
   var listUrl = 'lists'
     , listsResource = ListsRestangular.all(listUrl)
 
@@ -73,7 +74,7 @@ function ListsFactory (ListsRestangular, UserListsRestangular) {
     return group
   }
 
-  function getRandomVenueFromRandomList (listGroups) {
+  function chooseRandomVenueFromLists (listGroups) {
       var listGroup = getRandomListFromGroups(listGroups)
         , list = getRandomItem(listGroup.items)
 
@@ -82,15 +83,20 @@ function ListsFactory (ListsRestangular, UserListsRestangular) {
         .then(getRandomItem)
   }
 
-  function getVenue () {
+  function getVenue (listItem) {
+    return venuesFactory.get(listItem.venue.id)
+  }
+
+  function getChoice () {
     return myListsResource
       .getList()
-      .then(getRandomVenueFromRandomList)
+      .then(chooseRandomVenueFromLists)
+      .then(getVenue)
   }
 
   return {
     'getListsGroups': getMyListsGroups
-  , 'get': getVenue
+  , 'get': getChoice
   }
  }
 
@@ -98,5 +104,9 @@ function ListsFactory (ListsRestangular, UserListsRestangular) {
 angular.module('lists')
 .factory('UserListsRestangular', ['Restangular', UserListsRestangular])
 .factory('ListsRestangular', ['Restangular', ListsRestangular])
-.factory('listsFactory', [ 'ListsRestangular', 'UserListsRestangular', ListsFactory])
+.factory('listsFactory', [ 'venuesFactory'
+                         , 'ListsRestangular'
+                         , 'UserListsRestangular'
+                         , ListsFactory
+                         ])
 })()

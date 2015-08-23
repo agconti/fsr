@@ -23,9 +23,12 @@ function ListController ($scope, listsFactory) {
   this.get()
 
   this.getImageUrl = function () {
-   var host = ctr.venue.photo.prefix
+  if (ctr.venue === undefined || ctr.venue.id === undefined) {
+    return "http://placehold.it/828x628"
+  }
+   var host = ctr.venue.bestPhoto.prefix
      , size =  [828, 628].join("x")
-     , id = ctr.venue.photo.suffix
+     , id = ctr.venue.bestPhoto.suffix
 
    return [host, size, id].join("")
   }

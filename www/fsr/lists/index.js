@@ -18,7 +18,6 @@ function config ($stateProvider, $urlRouterProvider) {
 }
 
 
-angular.module('lists', ['ui.router', 'restangular'])
+angular.module('lists', ['ui.router', 'restangular', 'venues'])
 .config(['$stateProvider', '$urlRouterProvider', config])
-
 })()
