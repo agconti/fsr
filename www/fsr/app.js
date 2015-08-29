@@ -35,7 +35,8 @@ function config ($locationProvider, $stateProvider, $urlRouterProvider) {
 angular.module('fsr', [ 'ionic'
                       , 'config'
                       , 'auth'
-                      , 'lists'])
+                      , 'lists'
+                      , 'venues'])
 .run(['$ionicPlatform', startUp])
 .config([ '$locationProvider'
         , '$stateProvider'
