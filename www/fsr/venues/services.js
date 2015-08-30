@@ -52,16 +52,13 @@ function MapFactory (MAPBOX_CONFIG) {
   map.doubleClickZoom.disable()
   map.scrollWheelZoom.disable()
 
-  function setLocation (lat, lng, venueName){
+  function setLocation (lat, lng){
     var loc = [lat, lng]
       , zoom = 17
-      , options = {
-        title: venueName
-      }
 
     map.setView(loc, zoom)
 
-    L.marker(loc, options)
+    L.marker(loc)
      .addTo(map)
   }
   return {

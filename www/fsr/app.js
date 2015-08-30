@@ -42,5 +42,6 @@ angular.module('fsr', [ 'ionic'
 .config([ '$locationProvider'
         , '$stateProvider'
         , '$urlRouterProvider'
-        , config])
+        , config
+        ])
 })()

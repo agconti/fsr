@@ -7,7 +7,6 @@
  * @constructor
  */
 function Config (FS_CONFIG, RestangularProvider) {
-  // configure Restangular
   RestangularProvider.setBaseUrl(FS_CONFIG.host)
   RestangularProvider.setResponseExtractor(function(response) {
     return response.response
@@ -16,5 +15,4 @@ function Config (FS_CONFIG, RestangularProvider) {
 
 angular.module('config', ['restangular'])
 .config(['FS_CONFIG', 'RestangularProvider', Config])
-
 })()

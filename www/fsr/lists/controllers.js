@@ -12,12 +12,10 @@
  */
 function ListController (venue, $scope, listsFactory, mapFactory) {
   var vm = this
-
+  
+  console.log(venue)
   vm.venue = venue
-  mapFactory.setLocation( venue.location.lat
-                        , venue.location.lng
-                        , venue.name
-                        )
+  mapFactory.setLocation(venue.location.lat, venue.location.lng)
 
   vm.get = function() {
     listsFactory.get().then(function(venue){

@@ -17,8 +17,8 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: center center;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
     align-content: flex-start;
 
     li {
@@ -30,7 +30,7 @@
   &__title {
     flex: 1 1 auto;
     height: 10vh;
-    
+
     h1 {
       font-size: 1.8em;
     }

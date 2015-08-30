@@ -36,7 +36,7 @@ function UserListsRestangular (Restangular) {
 /**
  * A factory that manages lists from FS.
  * @constructor
- * @param {object} TipsFactory
+ * @param {object} venuesFactory
  * @param {object} ListsRestangular
  * @param {object} UserListsRestangular
  * @returns {object} ListsFactory
