@@ -19,9 +19,15 @@ $dark:                            #444 !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 /* Include all of Ionic */
-@import "../lib/ionic/scss/ionic";
+@import '../lib/ionic/scss/ionic'
 
+  // Config
 
-@import 'config/variables';
+, 'config/variables'
+, 'config/helpers'
 
-@import 'venues/venue';
+  // Componets
+, 'auth/login'
+, 'venues/venue'
+
+;

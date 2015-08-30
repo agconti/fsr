@@ -13,7 +13,6 @@
 function ListController (venue, $scope, listsFactory, mapFactory) {
   var vm = this
   
-  console.log(venue)
   vm.venue = venue
   mapFactory.setLocation(venue.location.lat, venue.location.lng)
 

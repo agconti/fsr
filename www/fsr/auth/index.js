@@ -24,8 +24,7 @@ function config ($httpProvider, $stateProvider, $urlRouterProvider) {
     .state('auth', {
       url: '/auth'
     , templateUrl: './fsr/auth/index.html'
-    , controller: "AuthController"
-    , controllerAs: "auth"
+    , controller: "AuthController as auth"
     })
 
     $urlRouterProvider.when('/auth/callback/', [ '$location'
