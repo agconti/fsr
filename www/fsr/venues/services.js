@@ -35,7 +35,42 @@ function VenuesFactory (VenuesRestangular) {
 }
 
 
-angular.module('lists')
+/**
+ * Allows leaflet / mapbox.js to be dependency injected. Handles
+ * configuration.
+ * @constructor
+ * @param {object} MAPBOX_CONFIG
+ * @returns {object} MapsFactory
+ */
+function MapFactory (MAPBOX_CONFIG) {
+  var L = window.L
+    , map = L.mapbox.map('map'
+                        , MAPBOX_CONFIG.map_type
+                        , MAPBOX_CONFIG.map_options
+                        )
+  map.dragging.disable()
+  map.doubleClickZoom.disable()
+  map.scrollWheelZoom.disable()
+
+  function setLocation (lat, lng, venueName){
+    var loc = [lat, lng]
+      , zoom = 17
+      , options = {
+        title: venueName
+      }
+
+    map.setView(loc, zoom)
+
+    L.marker(loc, options)
+     .addTo(map)
+  }
+  return {
+    'setLocation': setLocation
+  }
+}
+
+angular.module('venues')
 .factory('VenuesRestangular', [ 'Restangular', VenuesRestangular])
 .factory('venuesFactory', [ 'VenuesRestangular', VenuesFactory])
+.factory('mapFactory', ['MAPBOX_CONFIG', MapFactory])
 })()

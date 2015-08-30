@@ -5,30 +5,32 @@
 /**
  * Manages returning a random venue from fs lists
  * @constructor
+ * @param {object} venue -- resolved  in from route
  * @param {object} $scope
  * @param {object} listFactory
+ * @param {object} mapFactory
  */
-function ListController ($scope, listsFactory) {
-  var ctr = this
+function ListController (venue, $scope, listsFactory, mapFactory) {
+  var vm = this
 
-  this.get = function() {
+  vm.venue = venue
+  mapFactory.setLocation( venue.location.lat
+                        , venue.location.lng
+                        , venue.name
+                        )
+
+  vm.get = function() {
     listsFactory.get().then(function(venue){
-      ctr.venue = venue
+      vm.venue = venue
     }).finally(function() {
      $scope.$broadcast('scroll.refreshComplete')
    })
   }
 
-  // call on initialization. preping for bable
-  this.get()
-
-  this.getImageUrl = function () {
-  if (ctr.venue === undefined || ctr.venue.id === undefined) {
-    return "http://placehold.it/828x628"
-  }
-   var host = ctr.venue.bestPhoto.prefix
+  vm.getImageUrl = function () {
+   var host = vm.venue.bestPhoto.prefix
      , size =  [828, 628].join("x")
-     , id = ctr.venue.bestPhoto.suffix
+     , id = vm.venue.bestPhoto.suffix
 
    return [host, size, id].join("")
   }
@@ -37,5 +39,10 @@ function ListController ($scope, listsFactory) {
 
 
 angular.module('lists')
-.controller('ListController', ['$scope', 'listsFactory', ListController])
+.controller('ListController', [ 'venue'
+                              , '$scope'
+                              , 'listsFactory'
+                              , 'mapFactory'
+                              , ListController
+                              ])
 })()

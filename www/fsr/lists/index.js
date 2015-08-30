@@ -12,8 +12,12 @@ function config ($stateProvider, $urlRouterProvider) {
     .state('list', {
       url: '/lists'
     , templateUrl: './fsr/lists/index.html'
-    , controller: "ListController"
-    , controllerAs: "list"
+    , controller: "ListController as list"
+    , resolve: {
+        venue: ['listsFactory', function(listsFactory){
+          return listsFactory.get()
+        }]
+      }
     })
 }
 
