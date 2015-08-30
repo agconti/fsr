@@ -5,7 +5,9 @@
     <article class="venue">
       <img class="venue__image" ng-src="{{list.getImageUrl()}}" alt="{{list.venue.venue.name}}" />
       <ul class="venue__tips">
-        <li ng-repeat='tip in list.venue.tips.groups.slice(-1)[0].items | limitTo: 3'>{{tip.user.firstName }} says {{tip.text}}</li>
+        <li ng-repeat='tip in list.venue.tips.groups.slice(-1)[0].items | limitTo: 3'>
+          {{tip.text}}
+        </li>
       </ul>
       <header class="venue__title">
         <h1>{{list.venue.name}}</h1>
