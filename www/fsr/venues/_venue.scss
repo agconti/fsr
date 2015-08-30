@@ -14,21 +14,30 @@
   &__tips{
     flex: 1 1 auto;
     height: 40vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center center;
+    align-items: center;
+    align-content: flex-start;
+
+    li {
+      flex: 1 1 auto;
+      padding: 1em;
+    }
   }
 
-  &___title {
+  &__title {
     flex: 1 1 auto;
     height: 10vh;
+    
+    h1 {
+      font-size: 1.8em;
+    }
   }
 
   &__map {
     flex: 1 1 auto;
-    height: 100vh;
+    height: 90vh;
   }
-
-  &__refresh {
-    flex: 1 1 auto;
-    height: 10vh;
-  }
-
 }
