@@ -13,7 +13,7 @@ var gulp = require('gulp')
   , sass = require('gulp-sass')
   , minifyCss = require('gulp-minify-css')
 
-  // js 
+  // js
   , uglify = require('gulp-uglify')
   , flatten = require('gulp-flatten')
 
@@ -42,7 +42,7 @@ var gulp = require('gulp')
 function NgConfigOptions(env){
   this.environment = env || 'dev'
   this.createModule = false
-  this.wrap = ';(function () {\n <%= module %> \n})()'
+  this.wrap = ';(function () {\n"use-strict"\n\n<%= module %>})()'
 }
 
 gulp.task('browser-sync', function () {

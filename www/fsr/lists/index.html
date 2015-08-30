@@ -1,5 +1,5 @@
 <ion-view view-title="Lists">
-  <ion-content ng-controller="ListController as list">
+  <ion-content>
     <ion-refresher pulling-text="Let's go somewhere else..."
                    on-refresh="list.get()"></ion-refresher>
     <article class="venue">
@@ -10,7 +10,7 @@
       <header class="venue__title">
         <h1>{{list.venue.name}}</h1>
       </header>
-      <div class="venue__map"></div>
+      <div id="map" class="venue__map"></div>
     </article>
   </ion-content>
 </ion-view>
