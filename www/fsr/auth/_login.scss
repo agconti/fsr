@@ -1,14 +1,30 @@
-.btn--signin{
-  flex: none;
-  text-decoration: none;
-  color: black;
-  border: 1px solid black;
-  padding: 0.5em 1em;
+.login {
 
-  transition: box-shadow 0.25s ease-in;
+  video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    height: 100vh;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+    background-color: black;
+    transition: 1s opacity;
+  }
 
-  &:active,
-  &:focus {
-    box-shadow: 0 2px 0 black;
+  .btn--signin{
+    flex: none;
+    text-decoration: none;
+    background-color: hsla(0,100%, 100%, 0.8);
+    color: black;
+    border: 1px solid black;
+    padding: 0.5em 1em;
+
+    transition: all 0.3s ease-in;
+
+    &:active,
+    &:focus {
+      background-color: white;
+      box-shadow: 0 2px 0 black;
+    }
   }
 }
