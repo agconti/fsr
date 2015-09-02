@@ -29,15 +29,23 @@
 
   &__title {
     flex: 1 1 auto;
-    height: 10vh;
+    height: 15vh;
+    padding: 0.25em;
+    text-align: center;
 
-    h1 {
+    &__venue-name {
       font-size: 1.8em;
+      height: 66%;
+    }
+
+    &__venue-address {
+      font-size: 1.4em;
+      height: 33%;
     }
   }
 
   &__map {
     flex: 1 1 auto;
-    height: 90vh;
+    height: 85vh;
   }
 }
