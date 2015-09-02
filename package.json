@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "fsr: An Ionic project",
   "dependencies": {
-    "gulp": "^3.5.6"
+    "gulp": "^3.5.6",
+    "node.normalize.scss": "^3.0.3"
   },
   "devDependencies": {
     "browser-sync": "^2.8.2",
