@@ -10,7 +10,8 @@
         </li>
       </ul>
       <header class="venue__title">
-        <h1>{{list.venue.name}}</h1>
+        <h1 class="venue__title__venue-name">{{list.venue.name}}</h1>
+        <h2 class="venue__title__venue-address">{{list.venue.location.formattedAddress[0]}}</h2>
       </header>
       <div id="map" class="venue__map"></div>
     </article>
