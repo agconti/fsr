@@ -27,11 +27,12 @@ function config ($httpProvider, $stateProvider) {
 function ForceLogin ($rootScope, $state, authFactory) {
 
   $rootScope.$on('$stateChangeStart', function(e, toState) {
+
     if (toState.name === 'auth') { return false }
 
     if (!authFactory.isLoggedIn()) {
       e.preventDefault()
-      $state.go('auth')
+      return $state.go('auth')
     }
   })
 }
