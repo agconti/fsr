@@ -12,6 +12,8 @@ function AuthController (authFactory) {
   this.isLoggedIn = function(){
     return authFactory.isLoggedIn()
   }
+  this.login = function() { return authFactory.login() }
+
 }
 
 

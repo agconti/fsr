@@ -25,6 +25,8 @@ var gulp = require('gulp')
   , jsSrc = ['/app.js', '/**/index.js','/**/*.js'].map(function(path){
       return outputDir +  path
     })
+  , jsVendorSrc = './bower_components/**/*'
+  , jsVendorDest = './www/lib'
 
   // App config
   , configModule = 'config'
@@ -95,8 +97,20 @@ function buildJs() {
     .pipe(browserSync.stream())
 }
 
-gulp.task('build:js:dev', ['config:dev'], buildJs)
-gulp.task('build:js:prod', ['config:prod'], buildJs)
+/**
+ * Copy site's vendor scripts from bower_components to project lib.
+ * @return {stream}
+ */
+function buildVendorJs() {
+  return gulp.src(jsVendorSrc)
+    .pipe(changed(jsVendorDest))
+    .pipe(gulp.dest(jsVendorDest))
+    .pipe(browserSync.stream())
+}
+
+gulp.task('build:js:vendor', buildVendorJs)
+gulp.task('build:js:dev', ['config:dev', 'build:js:vendor'], buildJs)
+gulp.task('build:js:prod', ['config:prod', 'build:js:vendor'], buildJs)
 
 gulp.task('build:dev', ['build:js:dev', 'sass'])
 gulp.task('build:prod', ['build:js:prod', 'sass'])

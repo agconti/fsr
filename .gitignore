@@ -34,3 +34,8 @@ platforms
 plugins
 resources
 hooks
+
+# built files
+www/lib
+main.min.js
+main.css

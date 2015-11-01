@@ -5,13 +5,23 @@
 /**
  * A factory that manages authentication with FS.
  * @constructor
- * @param {object} FS_CONFIG -- foursquare
- * @param {object} store -- from angular-storage
+ * @param {object} $cordovaOauth -- foursquare oauth
+ * @param {object} store -- from ngStorage
+ * @param {object} FS_CONFIG -- foursquare config
  * @returns {object} AuthFactory
  */
-function AuthFactory (FS_CONFIG, store) {
-  var tokenKey = 'token'
+function AuthFactory ($cordovaOauth, store, FS_CONFIG) {
+  var tokenKey = 'fsr:token'
 
+  function login () {
+    return $cordovaOauth.foursquare(FS_CONFIG.client_id).then(function(res){
+      console.log(res)
+      saveToken(res.token)
+    },
+    function(err){
+      console.error(err)
+    })
+  }
   function getLoginUrl () {
     var host = FS_CONFIG.authenticateUrl
       , params= [ "client_id=" + FS_CONFIG.client_id
@@ -39,6 +49,7 @@ function AuthFactory (FS_CONFIG, store) {
   , 'getToken': getToken
   , 'saveToken': saveToken
   , 'isLoggedIn': isLoggedIn
+  , 'login': login
   }
  }
 
@@ -63,5 +74,5 @@ function AuthFactory (FS_CONFIG, store) {
 
 angular.module('auth')
 .factory('authInterceptor', ['authFactory', AuthInterceptor])
-.factory('authFactory', ['FS_CONFIG', 'store', AuthFactory])
+.factory('authFactory', ['$cordovaOauth', 'store', 'FS_CONFIG', AuthFactory])
 })()
