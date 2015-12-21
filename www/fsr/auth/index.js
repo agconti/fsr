@@ -12,12 +12,11 @@ function oauthCallback ($location, $state, authFactory) {
   $state.go('auth')
 }
 
-
 /**
  * App level configuration
  * @constructor
  */
-function config ($httpProvider, $stateProvider, $urlRouterProvider) {
+function config ($urlRouterProvider, $httpProvider, $stateProvider) {
   $httpProvider.interceptors.push('authInterceptor')
 
   $stateProvider
@@ -41,18 +40,20 @@ function config ($httpProvider, $stateProvider, $urlRouterProvider) {
  * @param {object} authFactory
  */
 function ForceLogin ($rootScope, $state, authFactory) {
+
   $rootScope.$on('$stateChangeStart', function(e, toState) {
+
     if (toState.name === 'auth') { return false }
 
     if (!authFactory.isLoggedIn()) {
       e.preventDefault()
-      $state.go('auth')
+      return $state.go('auth')
     }
   })
 }
 
 angular.module('auth', ['ui.router', 'angular-storage'])
-.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', config])
+.config(['$urlRouterProvider', '$httpProvider', '$stateProvider', config])
 .run(['$rootScope', '$state', 'authFactory', ForceLogin])
 
 })()

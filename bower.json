@@ -3,5 +3,12 @@
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.1.0"
+  },
+  "dependencies": {
+    "ng-cordova-oauth": "~0.1.4",
+    "a0-angular-storage": "~0.0.12"
+  },
+  "resolutions": {
+    "angular": ">= 1.0.8"
   }
 }

@@ -26,9 +26,13 @@ function startUp ($ionicPlatform) {
  * App level configuration
  * @constructor
  */
-function config ($locationProvider, $stateProvider, $urlRouterProvider) {
+function config ($locationProvider, $stateProvider, $urlRouterProvider, $injector) {
   $locationProvider.html5Mode(true)
-  $urlRouterProvider.otherwise('/lists')
+
+  $urlRouterProvider.otherwise(function($injector) {
+    var $state = $injector.get("$state")
+    $state.go('list')
+  })
 
 }
 
@@ -42,6 +46,7 @@ angular.module('fsr', [ 'ionic'
 .config([ '$locationProvider'
         , '$stateProvider'
         , '$urlRouterProvider'
+        , '$injector'
         , config
         ])
 })()
