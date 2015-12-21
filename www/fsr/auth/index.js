@@ -3,11 +3,21 @@
 
 
 /**
+ * Handles foursquare's oauth callback and extracts access_token
+ * @constructor
+ */
+function oauthCallback ($location, $state, authFactory) {
+  var access_token = $location.hash().split("=")[1]
+  authFactory.saveToken(access_token)
+  $state.go('auth')
+}
+
+/**
  * App level configuration
  * @constructor
  */
-function config ($httpProvider, $stateProvider) {
-  // $httpProvider.interceptors.push('authInterceptor')
+function config ($urlRouterProvider, $httpProvider, $stateProvider) {
+  $httpProvider.interceptors.push('authInterceptor')
 
   $stateProvider
     .state('auth', {
@@ -15,6 +25,11 @@ function config ($httpProvider, $stateProvider) {
     , templateUrl: './fsr/auth/index.html'
     , controller: "AuthController as auth"
     })
+
+    $urlRouterProvider.when('/auth/callback/', [ '$location'
+                                               , '$state'
+                                               , 'authFactory'
+                                               , oauthCallback])
 }
 
 /**
@@ -37,8 +52,8 @@ function ForceLogin ($rootScope, $state, authFactory) {
   })
 }
 
-angular.module('auth', ['ui.router', 'angular-storage', 'ngCordovaOauth'])
-.config(['$httpProvider', '$stateProvider', config])
+angular.module('auth', ['ui.router', 'angular-storage'])
+.config(['$urlRouterProvider', '$httpProvider', '$stateProvider', config])
 .run(['$rootScope', '$state', 'authFactory', ForceLogin])
 
 })()

@@ -5,23 +5,18 @@
 /**
  * A factory that manages authentication with FS.
  * @constructor
- * @param {object} $cordovaOauth -- foursquare oauth
  * @param {object} store -- from ngStorage
  * @param {object} FS_CONFIG -- foursquare config
  * @returns {object} AuthFactory
  */
-function AuthFactory ($cordovaOauth, store, FS_CONFIG) {
+function AuthFactory (store, FS_CONFIG) {
   var tokenKey = 'fsr:token'
 
   function login () {
-    return $cordovaOauth.foursquare(FS_CONFIG.client_id).then(function(res){
-      console.log(res)
-      saveToken(res.token)
-    },
-    function(err){
-      console.error(err)
-    })
+    var url = getLoginUrl()
+    return $location.path(url).replace()
   }
+
   function getLoginUrl () {
     var host = FS_CONFIG.authenticateUrl
       , params= [ "client_id=" + FS_CONFIG.client_id
@@ -61,10 +56,12 @@ function AuthFactory ($cordovaOauth, store, FS_CONFIG) {
   * @returns {object} config
   */
  function AuthInterceptor (authFactory) {
+   var token = authFactory.getToken()
+
    return {
      'request': function(config) {
        config.params = config.params || {}
-       config.params.oauth_token = authFactory.getToken()
+       config.params.oauth_token = token
        config.params.v = '20150801'
        return config
      }
@@ -73,6 +70,6 @@ function AuthFactory ($cordovaOauth, store, FS_CONFIG) {
 
 
 angular.module('auth')
+.factory('authFactory', ['store', 'FS_CONFIG', AuthFactory])
 .factory('authInterceptor', ['authFactory', AuthInterceptor])
-.factory('authFactory', ['$cordovaOauth', 'store', 'FS_CONFIG', AuthFactory])
 })()
